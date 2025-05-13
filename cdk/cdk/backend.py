@@ -115,6 +115,7 @@ class CorrespondenceNotifierStack(Stack):
                 email_collector_lambda,
                 proxy=True,
             ),
+            authorization_type=apigw.AuthorizationType.NONE,
         )
 
         scheduled_lambda = _lambda.Function(
