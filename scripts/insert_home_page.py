@@ -14,11 +14,12 @@ def create_home_page():
         s3_client = boto3.client("s3")
 
         email_endpoint = config["email_api_endpoint"]
+        homepage_url = config["homepage_url"]
         with open("index_template.html", "r") as file:
             content = file.read()
             modified_content = content.replace(
                 "https://your-unique-api-endpoint.com/prod/", email_endpoint
-            )
+            ).replace("https://your-unique-homepage-url/", homepage_url)
 
         with open("index.html", "w") as file:
             file.write(modified_content)
