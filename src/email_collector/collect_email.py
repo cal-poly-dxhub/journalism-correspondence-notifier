@@ -18,18 +18,60 @@ def lambda_handler(event, context):
     entred_password = body.get("password")
 
     if entred_password != the_password:
-        return {"statusCode": 401, "body": json.dumps("Incorrect Password")}
+        return {
+            "statusCode": 401,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST,OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Requested-With",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps(
+                {
+                    "message": "Incorrect Password",
+                    "success": True,
+                }
+            ),
+        }
 
     if not email_address:
-        return {"statusCode": 400, "body": json.dumps("Email address is required")}
+        return {
+            "statusCode": 400,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST,OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Requested-With",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps(
+                {
+                    "message": "Email address is required",
+                    "success": True,
+                }
+            ),
+        }
 
     insert_email(email_address)
 
     ses_client = boto3.client("ses")
 
-    response = ses_client.verify_email_identity(EmailAddress=email_address)
+    ses_client.verify_email_identity(EmailAddress=email_address)
 
     return {
         "statusCode": 200,
-        "body": json.dumps(f"Email {email_address} uploaded to database successfully"),
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Requested-With",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json",
+        },
+        "body": json.dumps(
+            {
+                "message": f"Email {email_address} uploaded to database successfully",
+                "success": True,
+            }
+        ),
     }
