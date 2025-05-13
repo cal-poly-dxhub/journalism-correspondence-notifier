@@ -198,7 +198,7 @@
             </style>
         </head>
         <body>
-            <a href="https://correspondence.notifier.calpoly.io/" class="home-button">Home</a>
+            <a href="{homepage_url}" class="home-button">Home</a>
             <div class="container">
                 <h1>
                     SLO City Council
@@ -310,7 +310,7 @@
                     }}
 
                     function sendEmail(email, password) {{
-                        const url = 'https://4cxjk3ukxk.execute-api.us-east-1.amazonaws.com/collectJournalismEmail';
+                        const url = {email_api_endpoint};
                         const data = {{
                             email: email,
                             password: password

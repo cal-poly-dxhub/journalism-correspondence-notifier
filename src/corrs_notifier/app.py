@@ -53,6 +53,8 @@ def generate_report(
         item_summary=item_summary,
         agenda_url=agenda_url,
         item_url=item_url,
+        email_api_endpoint=os.getenv("EMAIL_ENDPOINT"),
+        homepage_url=os.getenv("HOMEPAGE_URL")
     )
 
     issue_id = agenda_name.lower() + "-" + agenda_item.lower()
