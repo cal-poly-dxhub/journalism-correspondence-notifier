@@ -28,6 +28,36 @@ class CorrespondenceNotifierStack(Stack):
             self,
             "calpoly-journalism-notifier-dashboard",
             removal_policy=RemovalPolicy.DESTROY,
+            # Enable static website hosting
+            website_index_document="index.html",
+            # Allow public access
+            public_read_access=True,
+            # Configure public access blocking settings
+            block_public_access=s3.BlockPublicAccess(
+                block_public_acls=False,
+                block_public_policy=False,
+                ignore_public_acls=False,
+                restrict_public_buckets=False
+            ),
+        )
+
+        # Add the specified bucket policy
+        web_assets_bucket.add_to_resource_policy(
+            iam.PolicyStatement(
+                sid="PublicReadGetObject",
+                effect=iam.Effect.ALLOW,
+                principals=[iam.AnyPrincipal()],
+                actions=["s3:GetObject"],
+                resources=[web_assets_bucket.arn_for_objects("*")]
+            )
+        )
+
+        # Output the website URL
+        CfnOutput(
+            self,
+            "WebsiteURL",
+            value=web_assets_bucket.bucket_website_url,
+            description="URL for the S3 bucket website"
         )
 
         # Create DynamoDB tables
@@ -151,6 +181,8 @@ class CorrespondenceNotifierStack(Stack):
                 "LAZERFISCHE_USERNAME": config["lazerfische_username"],
                 "LAZERFISCHE_PASSWORD": config["lazerfische_password"],
                 "LAZERFISCHE_TOKEN": config["lazerfische_token"],
+                "EMAIL_ENDPOINT": config["email_api_endpoint"],
+                "HOMEPAGE_URL": config["homepage_url"],
             },
             runtime=_lambda.Runtime.PYTHON_3_13,
             handler="app.lambda_handler",
