@@ -193,6 +193,3 @@ def lambda_handler(event, context):
             "statusCode": 200,
             "body": json.dumps("Task completed successfully: No new issues"),
         }
-
-
-print(lambda_handler(None, None))
