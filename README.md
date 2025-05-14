@@ -84,15 +84,17 @@ This system automatically scrapes city council agendas from LazerFische and anal
 aws configure
 ```
 
-2. **Rename example config file**
+2. **Clone Repository**
+```bash
+git clone https://github.com/cal-poly-dxhub/journalism-correspondence-notifier
+```
+
+3. **Rename example config file**
 ```bash
 mv example_config.yaml config.yaml
 ```
 
-3. **Clone Repository**
-```bash
-git clone https://github.com/cal-poly-dxhub/journalism-correspondence-notifier
-```
+
 
 4. **Set Up Python Environment**
 ```bash
