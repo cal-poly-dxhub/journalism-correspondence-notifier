@@ -4,7 +4,7 @@ correspondence_threshold: 2
 shortcut_entry_index: 6
 citizen_name_index: 3
 date_index: 0
-correspondence_summarization_token_threshold: 1500 # Roughly three pages
+correspondence_summarization_token_threshold: "1500" # Roughly three pages
 email_collection_password: <your-subscribe-button-password>
 sender_email: <your-ses-verified-email>
 model_id: us.anthropic.claude-3-5-haiku-20241022-v1:0
