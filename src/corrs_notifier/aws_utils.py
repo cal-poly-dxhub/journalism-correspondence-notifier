@@ -48,8 +48,9 @@ def send_email(sender, recipients, subject, body_text="Default Text", body_html=
 
 
 def invoke_llm(user_input, system="", max_tokens=1000):
-    if len(user_input) > 30000:
-        user_input = user_input[0:30000]
+    max_input_tokens = int(os.getenv("MAX_SUMMARIZATION_TOKEN"))
+    if len(user_input) > max_input_tokens:
+        user_input = user_input[0:max_input_tokens]
 
     bedrock_config = Config(
         retries={
