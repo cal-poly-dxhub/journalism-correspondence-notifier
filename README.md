@@ -94,23 +94,44 @@ git clone https://github.com/cal-poly-dxhub/journalism-correspondence-notifier
 mv example_config.yaml config.yaml
 ```
 
+4. **Configure Settings**
+
+Update the following values in `config.yaml`:
+
+### Required Settings
+```yaml
+# Authentication
+email_collection_password: "your-chosen-password"    # Password for subscription system
+sender_email: "your-email@domain.com"               # Requires AWS SES setup
+
+# LazerFische Credentials
+lazerfische_username: "your-username"
+lazerfische_password: "your-password"
+lazerfische_token: "your-token"
+```
+
+See [AWS SES Email Setup Guide](https://docs.aws.amazon.com/ses/latest/dg/setting-up.html) for configuring your email.
+
+### Optional: Custom Domain Setup
+```yaml
+homepage_url: "https://your-custom-domain.com"      # Optional - for custom domain only
+```
+
+**IMPORTANT**: If using a custom domain:
+- Set `homepage_url` in `config.yaml` BEFORE running `cdk deploy`
+- Follow the [AWS guide for custom domain setup](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html)
+- If using default S3 bucket URL, leave `homepage_url` unchanged
 
 
-4. **Set Up Python Environment**
+5. **Set Up Python Environment**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-5. **Deploy Infrastructure**
+6. **Deploy Infrastructure**
 
-**IMPORTANT**: Custom Domain Setup
-
-If you want to use a custom domain instead of the default S3 bucket homepage URL:
-
-1. You MUST set the `homepage_url` value in `config.yaml` BEFORE running `cdk deploy`
-2. Follow the [AWS guide for registering a custom domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html)
 
 ```bash
 cd cdk
@@ -118,22 +139,12 @@ cdk synth
 cdk deploy
 ```
 
-6. **Configure Settings**
-Update the config file with the following values:
 
-From CloudFormation outputs:
+**From CloudFormation outputs** Update `config.yaml`:
 - `email_api_endpoint`: EmailCollectorApiEndpoint from CDK output
 - `assets_bucket_name`: WebAssetsBucketName from CDK output
-- `homepage_url`: WebsiteURL from CDK output (or your own custom URL see [AWS guide for setting up domain with Route53 and S3](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started-s3.html))
+- `homepage_url`: WebsiteURL from CDK output (or use your own custom URL for the bucket see [AWS guide for setting up domain with Route53 and S3](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started-s3.html))
 
-Set your desired values:
-- `email_collection_password`: Create a password for the subscription system
-- `sender_email`: Email address you wish to send emails from (requires [AWS SES setup](https://docs.aws.amazon.com/ses/latest/dg/setting-up.html))
-
-LazerFische credentials:
-- `lazerfische_username`: Your LazerFische username
-- `lazerfische_password`: Your LazerFische password
-- `lazerfische_token`: Your LazerFische authentication token
 
 7. **Initialize Homepage**
 ```bash
