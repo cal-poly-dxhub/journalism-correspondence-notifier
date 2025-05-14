@@ -148,6 +148,11 @@ class CorrespondenceNotifierStack(Stack):
             authorization_type=apigw.AuthorizationType.NONE,
         )
 
+        # If no custom url exists in config, simply use bucket url
+        homepage_url = config.get("homepage_url")
+        if not homepage_url or homepage_url == "<your-website-url>":
+            homepage_url = web_assets_bucket.bucket_website_url
+
         scheduled_lambda = _lambda.Function(
             self,
             "scheduled-notifier-function",
@@ -182,7 +187,7 @@ class CorrespondenceNotifierStack(Stack):
                 "LAZERFISCHE_PASSWORD": config["lazerfische_password"],
                 "LAZERFISCHE_TOKEN": config["lazerfische_token"],
                 "EMAIL_ENDPOINT": config["email_api_endpoint"],
-                "HOMEPAGE_URL": web_assets_bucket.bucket_website_url,
+                "HOMEPAGE_URL": homepage_url,
                 "MAX_SUMMARIZATION_TOKEN": config[
                     "correspondence_summarization_token_threshold"
                 ],
