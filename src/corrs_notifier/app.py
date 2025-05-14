@@ -54,7 +54,7 @@ def generate_report(
         agenda_url=agenda_url,
         item_url=item_url,
         email_api_endpoint=os.getenv("EMAIL_ENDPOINT"),
-        homepage_url=os.getenv("HOMEPAGE_URL")
+        homepage_url=os.getenv("HOMEPAGE_URL"),
     )
 
     issue_id = agenda_name.lower() + "-" + agenda_item.lower()
@@ -74,6 +74,7 @@ def generate_report(
         correspondence_summary=analysis["overall_summary"],
         agenda_url=agenda_url,
         item_url=item_url,
+        homepage_url=os.getenv(),
     )
 
     email_list = get_verified_emails()
