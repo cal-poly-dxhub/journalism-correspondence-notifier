@@ -102,6 +102,14 @@ pip3 install -r requirements.txt
 ```
 
 5. **Deploy Infrastructure**
+
+**IMPORTANT**: Custom Domain Setup
+
+If you want to use a custom domain instead of the default S3 bucket homepage URL:
+
+1. You MUST set the `homepage_url` value in `config.yaml` BEFORE running `cdk deploy`
+2. Follow the [AWS guide for registering a custom domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html)
+
 ```bash
 cd cdk
 cdk synth
@@ -114,7 +122,7 @@ Update the config file with the following values:
 From CloudFormation outputs:
 - `email_api_endpoint`: EmailCollectorApiEndpoint from CDK output
 - `assets_bucket_name`: WebAssetsBucketName from CDK output
-- `homepage_url`: WebsiteURL from CDK output (or your own custom URL - see [AWS guide for custom domain setup](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started-s3.html))
+- `homepage_url`: WebsiteURL from CDK output (or your own custom URL see [AWS guide for setting up domain with Route53 and S3](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started-s3.html))
 
 Set your desired values:
 - `email_collection_password`: Create a password for the subscription system

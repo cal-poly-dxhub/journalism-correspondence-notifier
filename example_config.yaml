@@ -9,7 +9,7 @@ email_collection_password: <your-subscribe-button-password>
 sender_email: <your-ses-verified-email>
 model_id: us.anthropic.claude-3-5-haiku-20241022-v1:0
 
-homepage_url: <your-website-url-from-cdk-output>
+homepage_url: <your-website-url>
 email_api_endpoint: <your-email-api-endpoint-from-cdk-output>
 assets_bucket_name: <your-assets-bucket-name-from-cdk-output>
 
