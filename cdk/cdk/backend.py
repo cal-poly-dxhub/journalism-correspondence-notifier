@@ -37,7 +37,7 @@ class CorrespondenceNotifierStack(Stack):
                 block_public_acls=False,
                 block_public_policy=False,
                 ignore_public_acls=False,
-                restrict_public_buckets=False
+                restrict_public_buckets=False,
             ),
         )
 
@@ -48,7 +48,7 @@ class CorrespondenceNotifierStack(Stack):
                 effect=iam.Effect.ALLOW,
                 principals=[iam.AnyPrincipal()],
                 actions=["s3:GetObject"],
-                resources=[web_assets_bucket.arn_for_objects("*")]
+                resources=[web_assets_bucket.arn_for_objects("*")],
             )
         )
 
@@ -57,7 +57,7 @@ class CorrespondenceNotifierStack(Stack):
             self,
             "WebsiteURL",
             value=web_assets_bucket.bucket_website_url,
-            description="URL for the S3 bucket website"
+            description="URL for the S3 bucket website",
         )
 
         # Create DynamoDB tables
@@ -182,7 +182,10 @@ class CorrespondenceNotifierStack(Stack):
                 "LAZERFISCHE_PASSWORD": config["lazerfische_password"],
                 "LAZERFISCHE_TOKEN": config["lazerfische_token"],
                 "EMAIL_ENDPOINT": config["email_api_endpoint"],
-                "HOMEPAGE_URL": config["homepage_url"],
+                "HOMEPAGE_URL": web_assets_bucket.bucket_website_url,
+                "MAX_SUMMARIZATION_TOKEN": config[
+                    "correspondence_summarization_token_threshold"
+                ],
             },
             runtime=_lambda.Runtime.PYTHON_3_13,
             handler="app.lambda_handler",
