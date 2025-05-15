@@ -201,8 +201,6 @@
             <a href="{homepage_url}" class="home-button">Home</a>
             <div class="container">
                 <h1>
-                    SLO City Council
-                    <br />
                     Citizen Correspondence Report
                 </h1>
 
