@@ -74,7 +74,7 @@ def generate_report(
         correspondence_summary=analysis["overall_summary"],
         agenda_url=agenda_url,
         item_url=item_url,
-        homepage_url=os.getenv(),
+        homepage_url=os.getenv("HOMEPAGE_URL"),
     )
 
     email_list = get_verified_emails()
