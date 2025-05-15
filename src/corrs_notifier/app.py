@@ -36,7 +36,7 @@ def generate_report(
 
     word_cloud_html = generate_word_cloud(analysis)
 
-    with open("web_template.txt", "r", encoding="utf-8") as file:
+    with open("issue_template.txt", "r", encoding="utf-8") as file:
         html_template = file.read()
 
     # Replace placeholders in the HTML
@@ -53,7 +53,6 @@ def generate_report(
         item_summary=item_summary,
         agenda_url=agenda_url,
         item_url=item_url,
-        email_api_endpoint=os.getenv("EMAIL_ENDPOINT"),
         homepage_url=os.getenv("HOMEPAGE_URL"),
     )
 
@@ -74,7 +73,7 @@ def generate_report(
         correspondence_summary=analysis["overall_summary"],
         agenda_url=agenda_url,
         item_url=item_url,
-        homepage_url=os.getenv("HOMEPAGE_URL"),
+        homepage_url=os.getenv("HOMEPAGE_URL").rstrip("/"),
     )
 
     email_list = get_verified_emails()
