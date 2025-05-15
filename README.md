@@ -101,20 +101,20 @@ Update the following values in `config.yaml`:
 ### Required Settings
 ```yaml
 # Authentication
-email_collection_password: "your-chosen-password"    # Password for subscription system
-sender_email: "your-email@domain.com"               # Requires AWS SES setup
+email_collection_password: <your-subscribe-button-password>    # Password for subscription system
+sender_email: <your-ses-verified-email>              # Requires AWS SES setup
 
 # LazerFische Credentials
-lazerfische_username: "your-username"
-lazerfische_password: "your-password"
-lazerfische_token: "your-token"
+lazerfische_username: <your-lazerfische-username>
+lazerfische_password: <your-lazerfische-password>
+lazerfische_token: <your-lazerfische-token>
 ```
 
 See [AWS SES Email Setup Guide](https://docs.aws.amazon.com/ses/latest/dg/setting-up.html) for configuring your email.
 
 ### Optional: Custom Domain Setup
 ```yaml
-homepage_url: "https://your-custom-domain.com"      # Optional - for custom domain only
+homepage_url: <your-website-url>      # Optional - for custom domain only
 ```
 
 **IMPORTANT**: If using a custom domain:
