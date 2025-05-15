@@ -6,6 +6,10 @@ import os
 
 
 def send_email(sender, recipients, subject, body_text="Default Text", body_html=None):
+    if not recipients:
+        print("No verified recipients in email list.")
+        return
+
     # Create a new SES client
     ses_client = boto3.client("ses")
 
