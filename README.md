@@ -156,6 +156,12 @@ Open index.html and subscribe using your email address
 
 **Note**: This system runs automatically every hour to check for new issues and generates web pages for items meeting the correspondence threshold criteria.
 
+## Testing
+To immediately test if the system is working:
+1. Change the START_DATE environment variable to a date before the agenda dates you want to process.
+2. Example: Set START_DATE to 05-01-2025 to create issues for all dates from then until present.
+
+
 ## Troubleshooting
 - Verify AWS credentials and permissions
 - Check LazerFische authentication
