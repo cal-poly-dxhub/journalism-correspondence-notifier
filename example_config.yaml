@@ -1,0 +1,32 @@
+repo_name: CityClerk
+correspondence_folder_id: 52773
+correspondence_threshold: 2
+shortcut_entry_index: 6
+citizen_name_index: 3
+date_index: 0
+correspondence_summarization_token_threshold: "1500" # Roughly three pages
+email_collection_password: <your-subscribe-button-password>
+sender_email: <your-ses-verified-email>
+model_id: us.anthropic.claude-3-5-haiku-20241022-v1:0
+
+homepage_url: <your-website-url>
+email_api_endpoint: <your-email-api-endpoint-from-cdk-output>
+assets_bucket_name: <your-assets-bucket-name-from-cdk-output>
+
+lazerfische_username: <your-lazerfische-username>
+lazerfische_password: <your-lazerfische-password>
+lazerfische_token: <your-lazerfische-token>
+
+item_summarization_prompt: |
+  Summarize this item. Limit your response to less than fifty words.
+  Start your response with The item reccomends
+
+overall_sentiment_prompt: |
+  Summarize citizens general sentiment. 
+  Limit your response to 50 words. Start your response with Citizens
+
+citizen_sentiment_prompt: |
+  Summarize this citizen's general sentiment. 
+  Limit your response to one short sentence. 
+  Start your message with a verb.
+  Do not include the instructions in your response.
